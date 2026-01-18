@@ -5,13 +5,15 @@ from app.main import Book
 
 class DisplayInterface(ABC):
     @abstractmethod
-    def display(self, book: Book, display_type: str):
+    def display(self, book: Book, display_type: str) -> None:
         pass
+
 
 class PrinterInterface(ABC):
     @abstractmethod
     def print_book(self, book: Book, print_type: str) -> None:
         pass
+
 
 class SerializerInterface(ABC):
     @abstractmethod

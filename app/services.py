@@ -1,6 +1,7 @@
 import json
 
-from app.interfaces import DisplayInterface, PrinterInterface, SerializerInterface
+from app.interfaces import (DisplayInterface,
+                            PrinterInterface, SerializerInterface)
 import xml.etree.ElementTree as ET
 
 from app.main import Book

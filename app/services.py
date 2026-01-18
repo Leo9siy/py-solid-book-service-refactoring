@@ -2,7 +2,7 @@ import json
 
 from app.interfaces import (DisplayInterface,
                             PrinterInterface, SerializerInterface)
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as Etree
 
 from app.main import Book
 
@@ -34,11 +34,11 @@ class Serializer(SerializerInterface):
         if serialize_type == "json":
             return json.dumps({"title": book.title, "content": book.content})
         elif serialize_type == "xml":
-            root = ET.Element("book")
-            title = ET.SubElement(root, "title")
+            root = Etree.Element("book")
+            title = Etree.SubElement(root, "title")
             title.text = book.title
-            content = ET.SubElement(root, "content")
+            content = Etree.SubElement(root, "content")
             content.text = book.content
-            return ET.tostring(root, encoding="unicode")
+            return Etree.tostring(root, encoding="unicode")
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")

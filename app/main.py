@@ -1,24 +1,23 @@
-
-class Book:
-    def __init__(self, title: str, content: str) -> None:
-        self.title = title
-        self.content = content
+from app.models import Book, PrintCommand, DisplayCommand, SerializerCommand
+from app.services import Display, Printer, Serializer
 
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
-    from app.services import Display, Printer, Serializer
-
     display = Display()
     printer = Printer()
     serializer = Serializer()
 
+    class_commands = {
+        "display": DisplayCommand(display),
+        "print": PrintCommand(printer),
+        "serialize": SerializerCommand(serializer)
+    }
+
     for cmd, method_type in commands:
-        if cmd == "display":
-            display.display(book, method_type)
-        elif cmd == "print":
-            printer.print_book(book, method_type)
-        elif cmd == "serialize":
-            return serializer.serialize(book, method_type)
+        if cmd == "serialize":
+            return class_commands.get("serialize").execute(book, method_type)
+
+        class_commands.get(cmd).execute(book, method_type)
 
 
 if __name__ == "__main__":

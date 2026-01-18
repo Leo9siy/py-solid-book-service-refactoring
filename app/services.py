@@ -16,7 +16,6 @@ class Display(DisplayInterface):
             raise ValueError(f"Unknown display type: {display_type}")
 
 
-
 class Printer(PrinterInterface):
     def print_book(self, book: Book, print_type: str) -> None:
         if print_type == "console":

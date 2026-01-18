@@ -1,41 +1,44 @@
 import json
 
-from app.interfaces import ScreenInterface, PrinterInterface, SerializerInterface
+from app.interfaces import DisplayInterface, PrinterInterface, SerializerInterface
 import xml.etree.ElementTree as ET
 
+from app.main import Book
 
-class Screen(ScreenInterface):
-    def display(self, display_type: str) -> None:
+
+class Display(DisplayInterface):
+    def display(self, book: Book, display_type: str) -> None:
         if display_type == "console":
-            print(self.content)
+            print(book.content)
         elif display_type == "reverse":
-            print(self.content[::-1])
+            print(book.content[::-1])
         else:
             raise ValueError(f"Unknown display type: {display_type}")
 
 
+
 class Printer(PrinterInterface):
-    def print_book(self, print_type: str) -> None:
+    def print_book(self, book: Book, print_type: str) -> None:
         if print_type == "console":
-            print(f"Printing the book: {self.title}...")
-            print(self.content)
+            print(f"Printing the book: {book.title}...")
+            print(book.content)
         elif print_type == "reverse":
-            print(f"Printing the book in reverse: {self.title}...")
-            print(self.content[::-1])
+            print(f"Printing the book in reverse: {book.title}...")
+            print(book.content[::-1])
         else:
             raise ValueError(f"Unknown print type: {print_type}")
 
 
 class Serializer(SerializerInterface):
-    def serialize(self, serialize_type: str) -> str:
+    def serialize(self, book: Book, serialize_type: str) -> str:
         if serialize_type == "json":
-            return json.dumps({"title": self.title, "content": self.content})
+            return json.dumps({"title": book.title, "content": book.content})
         elif serialize_type == "xml":
             root = ET.Element("book")
             title = ET.SubElement(root, "title")
-            title.text = self.title
+            title.text = book.title
             content = ET.SubElement(root, "content")
-            content.text = self.content
+            content.text = book.content
             return ET.tostring(root, encoding="unicode")
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")

@@ -1,19 +1,22 @@
 from abc import ABC, abstractmethod
 
+from app.main import Book
 
-class ScreenInterface(ABC):
+
+
+class DisplayInterface(ABC):
     @abstractmethod
-    def display(self, display_type: str):
+    def display(self, book: Book, display_type: str):
         pass
 
 
 class PrinterInterface(ABC):
     @abstractmethod
-    def print_book(self, print_type: str) -> None:
+    def print_book(self, book: Book, print_type: str) -> None:
         pass
 
 
 class SerializerInterface(ABC):
     @abstractmethod
-    def serialize(self, serialize_type: str) -> str:
+    def serialize(self, book: Book, serialize_type: str) -> str:
         pass

@@ -16,10 +16,10 @@ class Display(DisplayInterface):
         else:
             raise ValueError(f"Unknown display type: {display_type}")
 
-    def display_console(self, book: Book):
+    def display_console(self, book: Book) -> None:
         print(book.content)
 
-    def display_reverse(self, book: Book):
+    def display_reverse(self, book: Book) -> None:
         print(book.content[::-1])
 
 
@@ -32,11 +32,11 @@ class Printer(PrinterInterface):
         else:
             raise ValueError(f"Unknown print type: {print_type}")
 
-    def print_console(self, book: Book):
+    def print_console(self, book: Book) -> None:
         print(f"Printing the book: {book.title}...")
         print(book.content)
 
-    def print_reverse(self, book: Book):
+    def print_reverse(self, book: Book) -> None:
         print(f"Printing the book in reverse: {book.title}...")
         print(book.content[::-1])
 
@@ -50,13 +50,13 @@ class Serializer(SerializerInterface):
         else:
             raise ValueError(f"Unknown serialize type: {serialize_type}")
 
-    def serialize_json(self, book: Book):
+    def serialize_json(self, book: Book) -> json:
         return json.dumps({"title": book.title, "content": book.content})
-    def serialize_xml(self, book: Book):
+
+    def serialize_xml(self, book: Book) -> str:
         root = Etree.Element("book")
         title = Etree.SubElement(root, "title")
         title.text = book.title
         content = Etree.SubElement(root, "content")
         content.text = book.content
         return Etree.tostring(root, encoding="unicode")
-

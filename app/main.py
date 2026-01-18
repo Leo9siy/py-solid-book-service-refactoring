@@ -1,4 +1,5 @@
-from app.models import Book, PrintCommand, DisplayCommand, SerializerCommand
+from app.commands import DisplayCommand, PrintCommand, SerializerCommand
+from app.models import Book
 from app.services import Display, Printer, Serializer
 
 

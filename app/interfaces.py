@@ -5,7 +5,7 @@ from app.models import Book
 
 class CommandInterface(ABC):
     @abstractmethod
-    def execute(self, book: Book, method_type: str) -> str | None:
+    def execute(self, *args, **kwargs) -> str | None:
         pass
 
 

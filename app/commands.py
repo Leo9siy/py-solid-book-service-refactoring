@@ -1,5 +1,9 @@
-from app.interfaces import (CommandInterface, DisplayInterface,
-                            PrinterInterface, SerializerInterface)
+from app.interfaces import (
+    CommandInterface,
+    DisplayInterface,
+    PrinterInterface,
+    SerializerInterface
+)
 from app.models import Book
 
 

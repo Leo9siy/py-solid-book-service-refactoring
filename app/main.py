@@ -18,7 +18,9 @@ def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
         if cmd == "serialize":
             return class_commands.get("serialize").execute(book, method_type)
 
-        class_commands.get(cmd).execute(book, method_type)
+        cmd = class_commands.get(cmd)
+        if cmd:
+            cmd.execute(book, method_type)
 
 
 if __name__ == "__main__":

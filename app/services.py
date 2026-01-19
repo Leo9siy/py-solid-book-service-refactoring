@@ -33,12 +33,12 @@ class Printer(PrinterInterface):
             raise ValueError(f"Unknown print type: {print_type}")
 
     def print_console(self, book: Book) -> None:
-        print(f"Printing the book: {book.title}...")
-        print(book.content)
+        print(f"Printing the book: {book.title}...\n"
+              f"{book.content}")
 
     def print_reverse(self, book: Book) -> None:
-        print(f"Printing the book in reverse: {book.title}...")
-        print(book.content[::-1])
+        print(f"Printing the book in reverse: {book.title}...\n"
+              f"{book.content[::-1]}")
 
 
 class Serializer(SerializerInterface):
@@ -47,8 +47,8 @@ class Serializer(SerializerInterface):
             return self.serialize_json(book)
         elif serialize_type == "xml":
             return self.serialize_xml(book)
-        else:
-            raise ValueError(f"Unknown serialize type: {serialize_type}")
+
+        raise ValueError(f"Unknown serialize type: {serialize_type}")
 
     def serialize_json(self, book: Book) -> json:
         return json.dumps({"title": book.title, "content": book.content})

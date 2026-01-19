@@ -1,26 +1,16 @@
-from app.commands import DisplayCommand, PrintCommand, SerializerCommand
+from app.depencies import tuple_to_commands
 from app.models import Book
-from app.services import Display, Printer, Serializer
 
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
-    display = Display()
-    printer = Printer()
-    serializer = Serializer()
 
-    class_commands = {
-        "display": DisplayCommand(display),
-        "print": PrintCommand(printer),
-        "serialize": SerializerCommand(serializer)
-    }
+    commands = tuple_to_commands(commands)
 
-    for cmd, method_type in commands:
-        if cmd == "serialize":
-            return class_commands.get("serialize").execute(book, method_type)
+    for cmd in commands:
+        result = cmd.execute(book)
 
-        cmd = class_commands.get(cmd)
-        if cmd:
-            cmd.execute(book, method_type)
+        if result:
+            return result
 
 
 if __name__ == "__main__":
